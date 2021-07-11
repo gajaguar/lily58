@@ -18,6 +18,7 @@ SWAP_HANDS_ENABLE = no      # Enable one-hand typing
 OLED_DRIVER_ENABLE= yes     # OLED display
 VIA_ENABLE = no             # Enable configuring with VIA
 ENCODER_ENABLE = yes        # Enable encoder
+TAP_DANCE_ENABLE = yes      # Enable tap dance feature
 
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
 SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
