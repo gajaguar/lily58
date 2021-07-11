@@ -58,9 +58,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_EXTRA] = LAYOUT( \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GAME,    \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, GAME,    \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, KC_GRV,  KC_LT,   KC_LPRN, KC_LCBR, KC_LBRC,                   KC_RBRC, KC_RCBR, KC_RPRN, KC_GT,   KC_UNDS, XXXXXXX, \
+  KC_LSFT, KC_GRV,  KC_LT,   KC_LPRN, KC_LCBR, KC_LBRC,                   KC_RBRC, KC_RCBR, KC_RPRN, KC_GT,   KC_UNDS, XXXXXXX, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
                              _______, _______, _______, _______, _______, _______, _______, _______                             \
 ),
