@@ -13,6 +13,8 @@ enum {
     TD_LSFT_CAPS,
     TD_N_ENIE,
     TD_SINGLE_DOUBLE,
+    TD_LEFT_BRACKET_BRACE,
+    TD_RIGHT_BRACKET_BRACE,
 };
 
 // Tap Dance definitions
@@ -20,6 +22,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_LSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
     [TD_N_ENIE] = ACTION_TAP_DANCE_DOUBLE(KC_N, RALT(KC_N)),
     [TD_SINGLE_DOUBLE] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, S(KC_QUOT)),
+    [TD_LEFT_BRACKET_BRACE] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LCBR),
+    [TD_RIGHT_BRACKET_BRACE] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RCBR),
 };
 
 #define LOWER MO(_LOWER)
@@ -31,6 +35,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define TD_CAPS TD(TD_LSFT_CAPS)
 #define TD_ENIE TD(TD_N_ENIE)
 #define TD_QUOT TD(TD_SINGLE_DOUBLE)
+#define TD_LBRC TD(TD_LEFT_BRACKET_BRACE)
+#define TD_RBRC TD(TD_RIGHT_BRACKET_BRACE)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -50,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
  [_QWERTY] = LAYOUT( \
-  KC_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_BSPC, \
+  KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_BSPC, \
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_BSLS, \
   TD_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  TD_QUOT, \
   KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MPLY, KC_DEL,  TD_ENIE, KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_ENT,  \
@@ -58,18 +64,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_LOWER] = LAYOUT( \
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_NLCK,                   KC_P7,   KC_P8,   KC_P9,   XXXXXXX, XXXXXXX, _______, \
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_P4,   KC_P5,   KC_P6,   XXXXXXX, XXXXXXX, XXXXXXX, \
-  _______, KC_PSLS, KC_PAST, KC_PMNS, KC_PPLS, KC_EQL,                    KC_P1,   KC_P2,   KC_P3,   XXXXXXX, XXXXXXX, XXXXXXX, \
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, KC_P0,   KC_P0,   KC_PDOT, XXXXXXX, XXXXXXX, _______, \
+  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
+  KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, \
+  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,  \
+  XXXXXXX, KC_PSLS, KC_PAST, KC_PMNS, KC_PPLS, XXXXXXX, _______, _______, XXXXXXX, TD_LBRC, TD_RBRC, XXXXXXX, XXXXXXX, _______, \
                              _______, _______, _______, _______, _______, EXTRA,   _______, _______                             \
 ),
 
 [_RAISE] = LAYOUT( \
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_F11,  KC_F12,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,                    KC_HOME, KC_PGDN, KC_PGUP, KC_END,  XXXXXXX, XXXXXXX, \
-  _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX, \
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_HOME, KC_PGDN, KC_PGUP, KC_END,  XXXXXXX, XXXXXXX, \
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX, \
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
                              _______, _______, EXTRA,   _______, _______, _______, _______, _______                             \
 ),
 
