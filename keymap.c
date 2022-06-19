@@ -168,23 +168,28 @@ void oled_task_user(void) {
     oled_write_P(PSTR("Layer: "), false);
 
     switch (get_highest_layer(layer_state)) {
-    case _QWERTY:
-        oled_write_ln_P(PSTR("Default"), false);
+    case _NORMAL:
+        oled_write_ln_P(PSTR("NORMAL"), false);
+    case _FUNCS:
+        oled_write_ln_P(PSTR("FUNCS"), false);
         break;
-    case _LOWER:
-        oled_write_ln_P(PSTR("Num Lock"), false);
-        break;
-    case _RAISE:
-        oled_write_ln_P(PSTR("Functions"), false);
-        break;
-    case _EXTRA:
-        oled_write_ln_P(PSTR("Special"), false);
+    case _NUMBERS:
+        oled_write_ln_P(PSTR("NUM PAD"), false);
         break;
     case _GAME:
-        oled_write_ln_P(PSTR("Game"), false);
+        oled_write_ln_P(PSTR("GAME"), false);
+        break;
+    case _LOWER:
+        oled_write_ln_P(PSTR("NUMBERS"), false);
+        break;
+    case _RAISE:
+        oled_write_ln_P(PSTR("ARROWS"), false);
+        break;
+    case _EXTRA:
+        oled_write_ln_P(PSTR("SPECIAL"), false);
         break;
     default:
-        oled_write_ln_P(PSTR("Undefined"), false);
+        oled_write_ln_P(PSTR("UNDEFINED"), false);
     }
 
     oled_write_ln(read_keylog(), false);
