@@ -172,7 +172,7 @@ const char *read_keylogs(void);
 // void set_timelog(void);
 // const char *read_timelog(void);
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
   if (is_keyboard_master()) {
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
@@ -180,6 +180,7 @@ void oled_task_user(void) {
     switch (get_highest_layer(layer_state)) {
     case _NORMAL:
         oled_write_ln_P(PSTR("NORMAL"), false);
+        break;
     case _FUNCS:
         oled_write_ln_P(PSTR("FUNCS"), false);
         break;
