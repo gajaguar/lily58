@@ -152,8 +152,6 @@ void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
     }
 }
 
-#ifdef OLED_DRIVER_ENABLE
-
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master())
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
@@ -166,11 +164,6 @@ const char *read_logo(void);
 void set_keylog(uint16_t keycode, keyrecord_t *record);
 const char *read_keylog(void);
 const char *read_keylogs(void);
-
-// const char *read_mode_icon(bool swap);
-// const char *read_host_led_state(void);
-// void set_timelog(void);
-// const char *read_timelog(void);
 
 bool oled_task_user(void) {
   if (is_keyboard_master()) {
@@ -212,9 +205,6 @@ bool oled_task_user(void) {
   } else {
       oled_write(read_logo(), false);
   }
-}
-#endif // OLED_DRIVER_ENABLE
-
   return false;
 }
 
