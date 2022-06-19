@@ -5,9 +5,10 @@ enum layer_number {
   _FUNCS = 1,
   _NUMBERS = 2,
   _GAME = 3,
-  _LOWER = 4,
-  _RAISE = 5,
-  _EXTRA = 6,
+  _GAME_A = 4,
+  _LOWER = 5,
+  _RAISE = 6,
+  _EXTRA = 7,
 };
 
 // Tap Dance declarations
@@ -37,6 +38,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define EXTRA MO(_EXTRA)
 #define FUNCS TO(_FUNCS)
 #define GAME TO(_GAME)
+#define GAME_A MO(_GAME_A)
 #define LOWER MO(_LOWER)
 #define NORMAL TO(_NORMAL)
 #define NUMBERS TO(_NUMBERS)
@@ -85,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_FUNCS] = LAYOUT( \
-  TD_F1E,  KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   TD_F12B,  \
+  TD_F1E,  KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   TD_F12B, \
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_BSLS, \
   TD_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  TD_QUOT, \
   KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MPLY, KC_DEL,  TD_ENIE, KC_M,    KC_COMM, KC_DOT,  TD_QSTN,  KC_ENT,  \
@@ -93,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_NUMBERS] = LAYOUT( \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_NLCK, XXXXXXX, XXXXXXX, XXXXXXX, KC_PSLS, XXXXXXX, \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_NLCK, XXXXXXX, XXXXXXX, XXXXXXX, KC_PSLS, KC_BSPC, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PAST, XXXXXXX, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PMNS, XXXXXXX, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PPLS, KC_PENT, \
@@ -101,15 +103,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_GAME] = LAYOUT( \
-  KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    NORMAL,  \
-  KC_T,    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
-  KC_G,    KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-  KC_B,    KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_MPLY, KC_DEL,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,  \
-                             KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   SP_RALT, KC_RCTL                             \
+  KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  KC_T,    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,                      XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX, \
+  KC_G,    KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,                      XXXXXXX, KC_LEFT, KC_DOWN, KC_DOWN, XXXXXXX, XXXXXXX, \
+  KC_B,    KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_MPLY, KC_DEL,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+                             KC_LALT, XXXXXXX, GAME_A,  KC_SPC,  KC_ENT,  RAISE,   KC_RGUI, KC_RCTL                             \
+),
+
+[_GAME_A] = LAYOUT( \
+  KC_BSPC, KC_0,    KC_9,    KC_8,    KC_7,    KC_6,                      KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
+  KC_BSLS, KC_P,    KC_O,    KC_I,    KC_U,    KC_Y,                      KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   \
+  KC_QUOT, KC_SCLN, KC_L,    KC_K,    KC_J,    KC_H,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  KC_ENT,  KC_SLSH, KC_DOT,  KC_COMM, KC_M,    KC_N,    KC_MPLY, KC_DEL,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+                             KC_LALT, XXXXXXX, _______, KC_SPC,  KC_SPC,  EXTRA,   KC_RGUI, KC_RCTL                             \
 ),
 
 [_LOWER] = LAYOUT( \
-  TD_F1E,  KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  TD_F12B,  \
+  TD_F1E,  KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  TD_F12B, \
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, \
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,  \
   XXXXXXX, KC_PSLS, KC_PAST, KC_PMNS, KC_PPLS, XXXXXXX, _______, _______, XXXXXXX, TD_LBRC, TD_RBRC, XXXXXXX, XXXXXXX, _______, \
@@ -178,6 +188,9 @@ void oled_task_user(void) {
         break;
     case _GAME:
         oled_write_ln_P(PSTR("GAME"), false);
+        break;
+    case _GAME_A:
+        oled_write_ln_P(PSTR("GAME A"), false);
         break;
     case _LOWER:
         oled_write_ln_P(PSTR("NUMBERS"), false);
