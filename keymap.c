@@ -163,22 +163,23 @@ void oled_task_user(void) {
 #endif // OLED_DRIVER_ENABLE
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-#ifdef OLED_DRIVER_ENABLE
-    set_keylog(keycode, record);
-#endif
-    // set_timelog();
-  }
-  return true;
+    if (record->event.pressed) {
+        #ifdef OLED_DRIVER_ENABLE
+        set_keylog(keycode, record);
+        #endif
+        // set_timelog();
+    }
+    return true;
 }
 
 // Encoder
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) { /* First encoder */
         if (clockwise) {
-            tap_code(KC_VOLD);
-        } else {
             tap_code(KC_VOLU);
+        } else {
+            tap_code(KC_VOLD);
         }
     }
+    return true;
 }
