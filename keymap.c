@@ -2,10 +2,12 @@
 
 enum layer_number {
   _NORMAL = 0,
-  _LOWER,
-  _RAISE,
-  _EXTRA,
-  _GAME,
+  _FUNCS = 1,
+  _NUMBERS = 2,
+  _GAME = 3,
+  _LOWER = 4,
+  _RAISE = 5,
+  _EXTRA = 6,
 };
 
 // Tap Dance declarations
@@ -82,6 +84,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   SP_RALT, KC_RCTL                              \
 ),
 
+[_FUNCS] = LAYOUT( \
+  TD_F1E,  KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   TD_F12B,  \
+  KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_BSLS, \
+  TD_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  TD_QUOT, \
+  KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MPLY, KC_DEL,  TD_ENIE, KC_M,    KC_COMM, KC_DOT,  TD_QSTN,  KC_ENT,  \
+                             KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   SP_RALT, KC_RCTL                              \
+),
+
+[_NUMBERS] = LAYOUT( \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_NLCK, XXXXXXX, XXXXXXX, XXXXXXX, KC_PSLS, XXXXXXX, \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PAST, XXXXXXX, \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PMNS, XXXXXXX, \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PPLS, KC_PENT, \
+                             XXXXXXX, XXXXXXX, LOWER,   KC_SPC,  KC_P0,   RAISE,   XXXXXXX, KC_PDOT                             \
+),
 
 [_GAME] = LAYOUT( \
   KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    NORMAL,  \
@@ -90,6 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_B,    KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_MPLY, KC_DEL,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,  \
                              KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   SP_RALT, KC_RCTL                             \
 ),
+
 [_LOWER] = LAYOUT( \
   TD_F1E,  KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  TD_F12B,  \
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, \
