@@ -152,27 +152,31 @@ void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
     }
 }
 
+// The board's shared OLED framework (keyboards/mechboards/common/display_oled.c)
+// forces the master into OLED_ROTATION_270 via oled_init_kb, but the driver
+// chains oled_init_user(oled_init_kb(rotation)) (drivers/oled/oled_driver.c),
+// so this hook has the final word: long-axis orientation on both halves
+// (master 0, slave 180), matching the original lily58/pro layout. Calling
+// oled_init() again from task code would NOT work — it re-enters oled_init_kb
+// and the forced 270 with it.
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master())
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
-  return rotation;
+  return OLED_ROTATION_0;
 }
 
-// When you add source files to SRC in rules.mk, you can use functions.
-const char *read_layer_state(void);
-const char *read_logo(void);
-
-// Replaces the default Mechboards boot-splash bitmap (~500 bytes) with plain text.
-void render_logo(void) {
-  oled_write_P(PSTR("G.A.JAGUAR"), false);
-}
-
+// The framework keeps repainting its own Layer/Key/OS/Rate scaffold from
+// keyboard_post_init_kb/layer_state_set_kb/housekeeping_task_kb. Returning
+// false from here only suppresses its per-frame oled_task_kb additions, not
+// those other hooks, so we must fully own the buffer every frame to keep our
+// own content clean.
 bool oled_task_user(void) {
-  if (is_keyboard_master()) {
-    // Host Keyboard Layer Status
-    oled_write_P(PSTR("Layer: "), false);
 
-    switch (get_highest_layer(layer_state)) {
+  oled_clear();
+  oled_write_ln_P(PSTR("G.A.JAGUAR"), false);
+
+  oled_write_P(PSTR("Layer: "), false);
+  switch (get_highest_layer(layer_state)) {
     case _NORMAL:
         oled_write_ln_P(PSTR("NORMAL"), false);
         break;
@@ -199,21 +203,33 @@ bool oled_task_user(void) {
         break;
     default:
         oled_write_ln_P(PSTR("UNDEFINED"), false);
-    }
-
-  } else {
-      oled_write(read_logo(), false);
   }
+
   return false;
+}
+
+// housekeeping_task_kb (mechboards/common/display_oled.c) writes the loop
+// rate at row 14 every second, outside of oled_task_user's 50ms-gated redraw
+// (oled_render() flushes every main loop pass regardless of that gate). At
+// OLED_ROTATION_0 rows 10/14 are out of bounds, so oled_set_cursor clamps to
+// index 0 and the digits (and the one-time OS-detection word) would smear
+// over line 0. Rewrite line 0 right after that hook runs, same pass, so the
+// smear never reaches the panel; identical content sets no dirty bit, making
+// this a no-op between smears.
+void housekeeping_task_user(void) {
+    if (is_keyboard_master()) {
+        oled_set_cursor(0, 0);
+        oled_write_P(PSTR("G.A.JAGUAR"), false);
+    }
 }
 
 // Encoder
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) { /* First encoder */
         if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
             tap_code(KC_VOLD);
+        } else {
+            tap_code(KC_VOLU);
         }
     }
     return false;
