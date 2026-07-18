@@ -36,8 +36,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_EFFECT_BREATHING
 #define RGBLIGHT_SLEEP
 #define RGBLED_SPLIT { 5, 5 }
-
-// Encoder
-#define ENCODERS_PAD_A { F4 }
-#define ENCODERS_PAD_B { F5 }
-#define ENCODER_RESOLUTION 4
