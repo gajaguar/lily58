@@ -24,7 +24,7 @@ enum {
 };
 
 // Tap Dance definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [TD_F1_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_F1, KC_ESC),
     [TD_F12_BSPC] = ACTION_TAP_DANCE_DOUBLE(KC_F12, KC_BSPC),
     [TD_LEFT_BRACKET_BRACE] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LCBR),
