@@ -161,9 +161,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 // When you add source files to SRC in rules.mk, you can use functions.
 const char *read_layer_state(void);
 const char *read_logo(void);
-void set_keylog(uint16_t keycode, keyrecord_t *record);
-const char *read_keylog(void);
-const char *read_keylogs(void);
 
 bool oled_task_user(void) {
   if (is_keyboard_master()) {
@@ -198,9 +195,6 @@ bool oled_task_user(void) {
     default:
         oled_write_ln_P(PSTR("UNDEFINED"), false);
     }
-
-    oled_write_ln(read_keylog(), false);
-    oled_write_ln(read_keylogs(), false);
 
   } else {
       oled_write(read_logo(), false);
